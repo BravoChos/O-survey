@@ -1,29 +1,3 @@
-// const sgMail = require('@sendgrid/mail');
-// const keys = require("../config/keys");
- 
-// class Mailer {
-//   constructor({subject, recipients}, content){
-//     this.message = { 
-//       to: recipients,
-//       from: 'no-reply@osurvey.com',
-//       subject: subject,
-//       html: content,
-//       trackingSettings: {
-//         clickTracking: { enable: true }
-//       }
-//     };
-//     sgMail.setApiKey(keys.sendGridKey);
-//   }
-// // sendMultiple ensures individual emails are sent to each recipient separately, 
-// // so no one is able to see the other addresses the email was sent to. 
-//   async send() {
-//     const response = await sgMail.sendMultiple(this.message);
-//     return response;
-//   }
-// }
- 
-// module.exports = Mailer;
-
 const sendgrid = require('sendgrid');
 const helper = sendgrid.mail;
 const keys = require('../config/keys');
@@ -76,9 +50,7 @@ class Mailer extends helper.Mail {
       body: this.toJSON()
     });
 
-    console.log('response is not working properly')
     const response = await this.sgApi.API(request);
-    console.log(response,'finally succes!!')
     return response;
   // } catch (err) {
   //   console.log(err.response.body.errors);
