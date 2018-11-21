@@ -84,10 +84,25 @@ module.exports = app => {
     // console.log(events);
 
     res.send({});
-  })
+  });
+
+  app.get('/api/surveys', requireLogin, async (req, res) => {
+    //req.user
+    const surveys = await Survey.find({
+      _user: req.user.id
+    })
+    .select({ recipients: false})
+    // console.log(surveys);
+    res.send(surveys);
+  });
+
+
+
+
+
 };
 
-//befor refactoring
+//before refactoring
     // const events = _.map(req.body, (event) => {
       // const events = _.map(req.body, ({ email, url }) => {
       //   // const pathname = new URL(event.url).pathname;
